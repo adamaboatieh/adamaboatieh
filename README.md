@@ -44,8 +44,9 @@ sitemap.xml         list of pages for search engines
 llms.txt            plain-text summary for AI assistants
 site.webmanifest    name, colours and icons for browsers
 favicon.ico, favicon-32.png, favicon-192.png, apple-touch-icon.png
-CNAME               the custom domain for GitHub Pages
-.nojekyll           tells GitHub Pages to serve the files as they are
+wrangler.jsonc      Cloudflare deployment settings
+.assetsignore       files Cloudflare should not publish
+_headers            security and caching headers for Cloudflare
 preview.png         the screenshot shown above
 ```
 
@@ -53,14 +54,15 @@ preview.png         the screenshot shown above
 
 Open `index.html` in a browser. Nothing needs installing.
 
-### Publish it on adamaboatieh.com with GitHub Pages
+### Publish it on adamaboatieh.com with Cloudflare
 
-1. Push this repository to GitHub.
-2. Open the repository's **Settings**, then **Pages**. Under **Build and deployment**, choose **Deploy from a branch**, pick `main` and the `/ (root)` folder, and save.
-3. At your domain registrar, add these DNS records for `adamaboatieh.com`:
-   - four `A` records for `@` pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`
-   - one `CNAME` record for `www` pointing to `adamaboatieh.github.io`
-4. Back in **Settings**, **Pages**, confirm the custom domain shows `adamaboatieh.com`, wait for the DNS check to pass, then tick **Enforce HTTPS**.
+The repository includes `wrangler.jsonc`, which tells Cloudflare to serve this folder as a static site.
+
+1. In the Cloudflare dashboard, create a Workers application and connect this GitHub repository.
+2. Leave the build command empty and keep the deploy command as `npx wrangler deploy`.
+3. After the first deploy, open the Worker's **Settings**, then **Domains & Routes**, and add `adamaboatieh.com` as a custom domain.
+
+Every push to `main` then redeploys the site. `.assetsignore` keeps repository-only files such as this README out of the published site, and `_headers` sets the security and caching headers.
 
 ### After it is live
 

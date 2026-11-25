@@ -1,0 +1,9 @@
+{
+  // Cloudflare Workers config: serves this folder as a static site, no build step.
+  "name": "adamaboatieh",
+  "compatibility_date": "2026-11-25",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}

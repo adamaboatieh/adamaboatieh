@@ -1,0 +1,11 @@
+# Files in the repo that should not be published as part of the site
+.git
+.gitignore
+.assetsignore
+.nojekyll
+wrangler.jsonc
+README.md
+preview.png
+CNAME
+node_modules
+.wrangler
