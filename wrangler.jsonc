@@ -5,5 +5,12 @@
   "assets": {
     "directory": "./",
     "not_found_handling": "404-page"
-  }
+  },
+  // The site answers on both addresses; the workers.dev address is switched off.
+  "routes": [
+    { "pattern": "adamaboatieh.com", "custom_domain": true },
+    { "pattern": "www.adamaboatieh.com", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false
 }
