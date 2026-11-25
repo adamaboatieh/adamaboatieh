@@ -20,6 +20,8 @@ a{color:inherit;text-underline-offset:.22em;text-decoration-thickness:1px}
 img,svg{display:block;max-width:100%}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:2px}
 
+.skip{position:fixed;left:1rem;top:-4rem;z-index:30;padding:.6rem 1rem;background:var(--paper);color:var(--ink);font-weight:600;border-radius:6px;transition:top .2s}
+.skip:focus{top:1rem}
 .progress{position:fixed;inset:0 0 auto 0;height:3px;background:var(--cyan);transform-origin:0 50%;transform:scaleX(0);z-index:20}
 
 /* header */
@@ -66,10 +68,10 @@ img,svg{display:block;max-width:100%}
 .ticker span{font:500 clamp(1rem,1.5vw,1.25rem)/1 var(--display);font-stretch:85%;padding:1.1rem 0;white-space:nowrap;display:flex;align-items:center}
 .ticker span::after{content:"";width:.42em;height:.42em;background:var(--red);transform:rotate(45deg);margin-inline:1.6rem}
 .ticker span:nth-child(odd)::after{background:var(--cyan)}
+.ticker.paused .ticker-run{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(-50%)}}
 .ticker.rev{background:var(--ink)}
 .ticker.rev .ticker-run{animation-direction:reverse;animation-duration:200s}
-.ticker.rev+.sheet{margin-top:clamp(1rem,2.5vw,2rem)}
 
 /* shared section type */
 h2{font:800 clamp(2.6rem,7.5vw,7.5rem)/.92 var(--display);letter-spacing:-.04em}
@@ -108,7 +110,8 @@ h2{font:800 clamp(2.6rem,7.5vw,7.5rem)/.92 var(--display);letter-spacing:-.04em}
 .viz .note.left{text-anchor:start}
 .helmet path{fill:var(--deep);stroke:var(--paper);stroke-width:1.5;stroke-linejoin:round}
 .helmet .visor{fill:var(--cyan);stroke:none}
-.helmet .ping{fill:none;stroke:var(--cyan);stroke-linecap:round;animation:ping 1.6s ease-out infinite}
+.helmet .ping{fill:none;stroke:var(--cyan);stroke-linecap:round}
+.viz.live .ping{animation:ping 1.6s ease-out infinite}
 .helmet .p2{animation-delay:.25s}
 @keyframes ping{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
 .scope rect{fill:var(--deep);stroke:var(--line)}
@@ -125,7 +128,8 @@ h2{font:800 clamp(2.6rem,7.5vw,7.5rem)/.92 var(--display);letter-spacing:-.04em}
 .js .dots i.on{background:var(--cyan)}
 .js .dots i.head{background:var(--paper)}
 .attn{display:grid;grid-template-columns:repeat(16,1fr);gap:2px}
-.attn i{aspect-ratio:2/1;background:var(--cyan);opacity:var(--o,.3);border-radius:1px;animation:shimmer var(--d,3s) ease-in-out var(--dl,0s) infinite alternate}
+.attn i{aspect-ratio:2/1;background:var(--cyan);opacity:var(--o,.3);border-radius:1px;animation:shimmer var(--d,3s) ease-in-out var(--dl,0s) infinite alternate paused}
+.viz.live .attn i{animation-play-state:running}
 @keyframes shimmer{to{opacity:.06}}
 
 .more{border-top:1px solid #c9cdc2;padding-top:clamp(2rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:1.5rem 3rem}
@@ -150,9 +154,6 @@ h2{font:800 clamp(2.6rem,7.5vw,7.5rem)/.92 var(--display);letter-spacing:-.04em}
 .focus div{display:grid;grid-template-columns:10rem 1fr;gap:1rem;padding:.95rem 0;border-bottom:1px solid #c9cdc2}
 .focus dt{font:700 1.1rem/1.4 var(--display)}
 .focus dd{color:#3d5357}
-
-/* light panels open like a card as they scroll into view; --p runs 0 to 1 and is set in motion.js */
-.js .sheet{transform:perspective(1600px) rotateX(calc((1 - var(--p,1))*14deg)) scale(calc(.86 + var(--p,1)*.14));transform-origin:50% 0;will-change:transform;box-shadow:0 -30px 80px -40px rgba(0,0,0,calc((1 - var(--p,1))*.9))}
 
 /* experience */
 .experience{padding:clamp(3.5rem,8vw,8rem) var(--pad);background:var(--ink)}
@@ -276,7 +277,6 @@ h2{font:800 clamp(2.6rem,7.5vw,7.5rem)/.92 var(--display);letter-spacing:-.04em}
   .js .portrait{clip-path:none}
   .js .gantt li::before{transform:none}
   .js .ev-img{clip-path:none}
-  .js .sheet{transform:none}
   .js .end-route{stroke-dashoffset:0}
   .js .end-stops,.js .mail,.js .elsewhere a,.js .sign{opacity:1;transform:none}
   .js .dots i{background:var(--cyan)}

@@ -1,0 +1,18 @@
+# Adam Abo Atieh
+
+> Portfolio of Adam Abo Atieh, based in Lebanon. Backend systems, automation and applied AI.
+
+## Projects
+
+- [CHIA Edge Tutor](https://github.com/SocialLab-AI/CHIA-Project): SocialLab team project comparing Gemini-guided optimization with random search over a hardware and software design space.
+- [Smart Helmet Backend](https://github.com/adamaboatieh/smart_helmet_backend): Real-time FastAPI backend for a motorcycle safety helmet prototype.
+- [Discord Instructor Workspace](https://github.com/adamaboatieh/Discord-Activity-Intelligence-Bot): Discord bot and dashboard for running class sessions.
+- [Post-quantum secure AI agent](https://github.com/adamaboatieh/Post-Quantum-Secure-AI-Agent): Research prototype that signs AI-agent tool actions with Ed25519 or ML-DSA-44.
+- [Smart Helmet anomaly detection](https://github.com/adamaboatieh/Machine-Learning-Project): Unsupervised crash and anomaly detection on helmet sensor data.
+- [Velora e-commerce platform](https://github.com/adamaboatieh/Ecommerce-Django-Website): Storefront in React, TypeScript and Django REST Framework.
+
+## Contact
+
+- Email: me@adamaboatieh.com
+- [GitHub](https://github.com/adamaboatieh)
+- [LinkedIn](https://www.linkedin.com/in/adam-abo-atieh/)

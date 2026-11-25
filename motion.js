@@ -33,19 +33,8 @@
     const max = document.documentElement.scrollHeight - innerHeight;
     bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
   };
-  /* Light panels open like a card: flat and full width once their top edge is 45% up the screen */
-  const sheets = reduce ? [] : $$('.sheet');
-  const openSheets = () => sheets.forEach(el => {
-    const t = Math.min(1, Math.max(0, (innerHeight - el.offsetTop + scrollY) / (innerHeight * 0.55)));
-    el.style.setProperty('--p', (t * t * (3 - 2 * t)).toFixed(3));
-  });
-  let ticking = false;
-  addEventListener('scroll', () => {
-    onScroll();
-    if (!ticking) { ticking = true; requestAnimationFrame(() => { openSheets(); ticking = false; }); }
-  }, { passive: true });
-  addEventListener('resize', openSheets);
-  onScroll(); openSheets();
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   /* Ticker: repeat the run so each half is wider than any screen and the loop never shows a gap */
   $$('.ticker-run').forEach(run => { run.innerHTML = run.innerHTML.repeat(run.children.length > 8 ? 8 : 16); });
@@ -75,7 +64,10 @@
 
   /* CHIA sketch: 250 dots and an attention grid */
   const dots = $('.dots'), attn = $('.attn'), count = $('.chia-count b');
-  if (dots) {
+  let chiaBuilt = false;
+  function buildChia() {
+    if (chiaBuilt || !dots) return;
+    chiaBuilt = true;
     dots.innerHTML = '<i></i>'.repeat(250);
     let h = '';
     for (let r = 0; r < 8; r++) for (let c = 0; c < 16; c++) {
@@ -127,13 +119,21 @@
   const live = new IntersectionObserver(entries => {
     entries.forEach(e => {
       const svg = $('svg', e.target), kind = e.target.dataset.viz, on = e.isIntersecting && !reduce;
+      e.target.classList.toggle('live', on);
+      if (kind === 'chia' && e.isIntersecting) buildChia();
       if (svg) on ? svg.unpauseAnimations() : svg.pauseAnimations();
       if (kind === 'wave') { cancelAnimationFrame(waveRaf); if (on) waveRaf = requestAnimationFrame(wave); }
       if (kind === 'chia') { clearTimeout(chiaTimer); if (on) chiaStep(); }
     });
-  }, { threshold: 0.15 });
+  }, { rootMargin: '200px 0px' });
   $$('[data-viz]').forEach(v => live.observe(v));
-  const end = $('.end-track');
-  if (end && !reduce) new IntersectionObserver(([e]) => e.isIntersecting ? end.unpauseAnimations() : end.pauseAnimations()).observe(end);
+  /* Background route lines and the scrolling bars only run while they are on screen */
+  if (!reduce) {
+    const idle = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.target.matches('svg')) e.isIntersecting ? e.target.unpauseAnimations() : e.target.pauseAnimations();
+      else e.target.classList.toggle('paused', !e.isIntersecting);
+    }));
+    $$('.hero-track, .end-track, .ticker').forEach(el => idle.observe(el));
+  }
   if (reduce) $$('svg').forEach(s => s.pauseAnimations && s.pauseAnimations());
 })();

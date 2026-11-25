@@ -4,7 +4,9 @@ I build backend systems and work with AI models, running them and measuring how 
 
 Based in Lebanon. BSc in Computer Science, Lebanese International University (2022 to 2026).
 
-[![Preview of the portfolio site](preview.png)](index.html)
+Portfolio: [adamaboatieh.com](https://adamaboatieh.com/)
+
+[![Preview of the portfolio site](preview.png)](https://adamaboatieh.com/)
 
 ## Projects
 
@@ -29,31 +31,47 @@ Based in Lebanon. BSc in Computer Science, Lebanese International University (20
 
 ## About this repository
 
-This repository holds my portfolio site. It is plain HTML, CSS and JavaScript with no framework, no build step and no external requests: the fonts and images are in the repository.
+This repository holds my portfolio site. It is plain HTML, CSS and JavaScript with no framework, no build step and no third-party requests: the fonts and images are in the repository.
 
 ```
-index.html     page content
-styles.css     layout, colour and animation
-motion.js      scroll effects, the live clock and the project sketches
-assets/        portrait, event photos and fonts
-preview.png    the screenshot shown above
+index.html          page content, SEO tags and structured data
+styles.css          layout, colour and animation
+motion.js           scroll effects, the live clock and the project sketches
+404.html            page shown for a wrong address
+assets/             portrait, event photos, fonts and the link-preview image
+robots.txt          tells search engines the site may be indexed
+sitemap.xml         list of pages for search engines
+llms.txt            plain-text summary for AI assistants
+site.webmanifest    name, colours and icons for browsers
+favicon.svg, favicon-32.png, apple-touch-icon.png
+CNAME               the custom domain for GitHub Pages
+.nojekyll           tells GitHub Pages to serve the files as they are
+preview.png         the screenshot shown above
 ```
 
 ### Run it locally
 
 Open `index.html` in a browser. Nothing needs installing.
 
-### Publish it with GitHub Pages
+### Publish it on adamaboatieh.com with GitHub Pages
 
 1. Push this repository to GitHub.
-2. Open the repository's **Settings**, then **Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**, pick `main` and the `/ (root)` folder, and save.
-4. After a minute or two the site is live at the address GitHub shows on that page.
+2. Open the repository's **Settings**, then **Pages**. Under **Build and deployment**, choose **Deploy from a branch**, pick `main` and the `/ (root)` folder, and save.
+3. At your domain registrar, add these DNS records for `adamaboatieh.com`:
+   - four `A` records for `@` pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`
+   - one `CNAME` record for `www` pointing to `adamaboatieh.github.io`
+4. Back in **Settings**, **Pages**, confirm the custom domain shows `adamaboatieh.com`, wait for the DNS check to pass, then tick **Enforce HTTPS**.
+
+### After it is live
+
+- Add the site in [Google Search Console](https://search.google.com/search-console) and submit `https://adamaboatieh.com/sitemap.xml`.
+- When the content changes, update the `lastmod` date in `sitemap.xml`.
 
 ### Notes on the design
 
-- Animations switch off for visitors who have reduced motion turned on.
+- Animations switch off for visitors who have reduced motion turned on, and pause while off screen.
 - The page works without JavaScript; only the motion and the live clock are lost.
+- A content security policy in the page allows only the site's own scripts, styles, fonts and images.
 - The moving sketches beside each project illustrate how the system works. They are not recorded data.
 
 ## Say hi
