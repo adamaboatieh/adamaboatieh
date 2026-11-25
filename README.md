@@ -43,7 +43,7 @@ robots.txt          tells search engines the site may be indexed
 sitemap.xml         list of pages for search engines
 llms.txt            plain-text summary for AI assistants
 site.webmanifest    name, colours and icons for browsers
-favicon.svg, favicon-32.png, apple-touch-icon.png
+favicon.ico, favicon-32.png, favicon-192.png, apple-touch-icon.png
 CNAME               the custom domain for GitHub Pages
 .nojekyll           tells GitHub Pages to serve the files as they are
 preview.png         the screenshot shown above
